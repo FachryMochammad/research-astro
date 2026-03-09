@@ -1,18 +1,395 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { Card } from "../components/Card";
-import { Button } from "antd";
 ---
 
-<BaseLayout
-  title="Home"
-  description="Welcome to PortrAI — your workplace simulation platform."
->
-  <h1 class="text-3xl font-bold text-red-500">Welcome to Astro!</h1>
-  <p>This is the home page.</p>
-  <Card client:load title="Card Title" description="This is a card component." />
-  <a href="/about">
-	<Button type="primary" className="mt-4">About</Button>
-  </a>
+<BaseLayout title="Dashboard" description="Your PortrAI dashboard — manage scenarios, messages, and track your progress.">
+  <div class="dash-wrapper">
 
+    <!-- Header -->
+    <header class="dash-header">
+      <div>
+        <p class="dash-greeting">Good morning,</p>
+        <h1 class="dash-name">Fachry Mochammad 👋</h1>
+      </div>
+    
+    </header>
+
+    <!-- Stats -->
+    <section class="stats-row">
+      {[
+        { label: "Scenarios Done", value: "12", delta: "+3 this week" },
+        { label: "Messages Sent", value: "84", delta: "+12 today" },
+        { label: "Avg. Score", value: "87%", delta: "↑ 4pts" },
+        { label: "Streak", value: "5 days", delta: "🔥 Keep it up!" },
+      ].map((s) => (
+        <div class="stat-card">
+          <div class="stat-label">{s.label}</div>
+          <div class="stat-value">{s.value}</div>
+          <div class="stat-delta">{s.delta}</div>
+        </div>
+      ))}
+    </section>
+
+    <!-- Main grid -->
+    <div class="main-grid">
+
+      <!-- Active Scenarios -->
+      <section class="card scenarios-card">
+        <div class="card-header">
+          <h2 class="card-title">Active Scenarios</h2>
+          <a href="#" class="card-link">View all →</a>
+        </div>
+        <ul class="scenario-list">
+          {[
+            { title: "Q3 Budget Review", type: "📄 Document", progress: 65, status: "In progress" },
+            { title: "Team Conflict Resolution", type: "💬 Chat", progress: 30, status: "Just started" },
+            { title: "Client Onboarding Call", type: "🎙️ Voice", progress: 90, status: "Almost done" },
+          ].map((s) => (
+            <li class="scenario-item">
+              <div class="scenario-top">
+                <div>
+                  <div class="scenario-title">{s.title}</div>
+                  <div class="scenario-type">{s.type}</div>
+                </div>
+                <span class="scenario-status">{s.status}</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style={`width: ${s.progress}%`}></div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <!-- Right column -->
+      <div class="right-col">
+
+        <!-- Recent activity -->
+        <section class="card activity-card">
+          <h2 class="card-title">Recent Activity</h2>
+          <ul class="activity-list">
+            {[
+              { icon: "📧", text: "Replied to onboarding email", time: "2m ago" },
+              { icon: "💬", text: "Sent message in Team Chat", time: "1h ago" },
+              { icon: "📄", text: "Reviewed Budget Draft v2", time: "3h ago" },
+              { icon: "✅", text: "Completed Email scenario", time: "Yesterday" },
+            ].map((a) => (
+              <li class="activity-item">
+                <span class="activity-icon">{a.icon}</span>
+                <span class="activity-text">{a.text}</span>
+                <span class="activity-time">{a.time}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <!-- Quick start -->
+        <section class="card quick-card">
+          <h2 class="card-title">Quick Start</h2>
+          <div class="quick-grid">
+            {[
+              { icon: "💬", label: "New Chat" },
+              { icon: "📧", label: "New Email" },
+              { icon: "📄", label: "New Doc" },
+              { icon: "🎙️", label: "Voice Call" },
+            ].map((q) => (
+              <button class="quick-btn">
+                <span class="quick-icon">{q.icon}</span>
+                <span class="quick-label">{q.label}</span>
+              </button>
+            ))}
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+  </div>
 </BaseLayout>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Syne:wght@700;800&display=swap');
+
+  .dash-wrapper {
+    font-family: 'DM Sans', sans-serif;
+    color: #1F2937;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 5rem;
+  }
+
+  /* Header */
+  .dash-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .dash-greeting {
+    font-size: 0.9rem;
+    color: #9CA3AF;
+    margin: 0 0 0.2rem;
+    font-weight: 500;
+  }
+
+  .dash-name {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 800;
+    margin: 0;
+    color: #111827;
+  }
+
+  .watch-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.6rem 1.25rem;
+    border: 1.5px solid #E5E7EB;
+    border-radius: 10px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #4B5563;
+    text-decoration: none;
+    background: white;
+    transition: border-color 0.2s, box-shadow 0.2s, color 0.2s;
+    white-space: nowrap;
+  }
+
+  .watch-btn:hover {
+    border-color: #9CA3AF;
+    color: #1F2937;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  /* Stats */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.5s ease 0.1s both;
+  }
+
+  .stat-card {
+    background: white;
+    border: 1px solid #F3F4F6;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .stat-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    transform: translateY(-2px);
+  }
+
+  .stat-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #9CA3AF;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #111827;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .stat-delta {
+    font-size: 0.8rem;
+    color: #6B7280;
+  }
+
+  /* Main grid */
+  .main-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 1.25rem;
+    animation: fadeUp 0.5s ease 0.2s both;
+  }
+
+  /* Cards */
+  .card {
+    background: white;
+    border: 1px solid #F3F4F6;
+    border-radius: 14px;
+    padding: 1.5rem;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+  }
+
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0 0 1.25rem;
+    color: #111827;
+  }
+
+  .card-header .card-title { margin: 0; }
+
+  .card-link {
+    font-size: 0.8rem;
+    color: #9CA3AF;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .card-link:hover { color: #4B5563; }
+
+  /* Scenarios */
+  .scenario-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .scenario-item {}
+
+  .scenario-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 0.6rem;
+    gap: 1rem;
+  }
+
+  .scenario-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #1F2937;
+    margin-bottom: 0.15rem;
+  }
+
+  .scenario-type {
+    font-size: 0.78rem;
+    color: #9CA3AF;
+  }
+
+  .scenario-status {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #6B7280;
+    background: #F3F4F6;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .progress-bar {
+    height: 5px;
+    background: #F3F4F6;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #9CA3AF, #4B5563);
+    border-radius: 999px;
+    transition: width 0.6s ease;
+  }
+
+  /* Right col */
+  .right-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  /* Activity */
+  .activity-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .activity-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .activity-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .activity-text {
+    color: #4B5563;
+    flex: 1;
+  }
+
+  .activity-time {
+    font-size: 0.75rem;
+    color: #D1D5DB;
+    white-space: nowrap;
+  }
+
+  /* Quick start */
+  .quick-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .quick-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 1rem 0.5rem;
+    background: #F9FAFB;
+    border: 1.5px solid #F3F4F6;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .quick-btn:hover {
+    border-color: #D1D5DB;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transform: translateY(-1px);
+  }
+
+  .quick-icon { font-size: 1.3rem; }
+
+  .quick-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #4B5563;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
+    .main-grid { grid-template-columns: 1fr; }
+    .dash-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  }
+</style>

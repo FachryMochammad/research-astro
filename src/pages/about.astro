@@ -2,9 +2,255 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout
-  title="About"
-  description="Learn more about PortrAI and how it works."
->
-  <h1>About</h1>
+<BaseLayout title="About" description="Learn more about PortrAI and how it helps you grow through realistic workplace simulations.">
+  <div class="about-wrapper">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-tag">About PortrAI</div>
+      <h1 class="hero-title">
+        Learn by doing,<br />
+        <span class="accent">not just reading.</span>
+      </h1>
+      <p class="hero-sub">
+        PortrAI puts you inside real workplace scenarios — helping you build
+        communication, collaboration, and decision-making skills that actually stick.
+      </p>
+    </section>
+
+    <!-- What is it -->
+    <section class="section">
+      <div class="section-grid">
+        <div class="section-label">What is it?</div>
+        <div class="section-body">
+          <p>
+            PortrAI is an immersive simulation platform designed to bridge the gap
+            between classroom learning and the real world. You'll navigate realistic
+            workplace challenges — from handling emails and Slack messages to
+            participating in voice calls and document reviews.
+          </p>
+          <p>
+            Every interaction is designed to mirror what you'd genuinely encounter
+            in a professional environment, giving you a safe space to practice,
+            make mistakes, and grow.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+      <h2 class="features-title">What you'll experience</h2>
+      <div class="features-grid">
+        {[
+          { icon: "💬", title: "Workplace Chat", desc: "Respond to colleagues, navigate team dynamics, and handle real-time messaging scenarios." },
+          { icon: "📧", title: "Email Simulation", desc: "Compose, reply to, and prioritize professional emails under realistic conditions." },
+          { icon: "📄", title: "Document Review", desc: "Create, edit, and give feedback on documents just like you would on the job." },
+          { icon: "🎙️", title: "Voice Calls", desc: "Practice speaking and listening in simulated meetings and one-on-ones." },
+        ].map((f) => (
+          <div class="feature-card">
+            <div class="feature-icon">{f.icon}</div>
+            <h3 class="feature-title">{f.title}</h3>
+            <p class="feature-desc">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Mission -->
+    <section class="mission">
+      <blockquote>
+        "We believe the best way to prepare for the future of work
+        is to experience it — safely, repeatedly, and meaningfully."
+      </blockquote>
+      <cite>— The PortrAI Team</cite>
+    </section>
+
+  </div>
 </BaseLayout>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;1,400&family=Syne:wght@700;800&display=swap');
+
+  .about-wrapper {
+    font-family: 'DM Sans', sans-serif;
+    color: #1F2937;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 6rem;
+  }
+
+  /* Hero */
+  .hero {
+    margin-bottom: 5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #6B7280;
+    border: 1px solid #E5E7EB;
+    padding: 0.3rem 0.85rem;
+    border-radius: 999px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 0 0 1.25rem;
+    color: #111827;
+  }
+
+  .accent {
+    color: #4B5563;
+    position: relative;
+  }
+
+  .accent::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 2px;
+    width: 100%;
+    height: 3px;
+    background: #D1D5DB;
+    border-radius: 2px;
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: #6B7280;
+    line-height: 1.7;
+    max-width: 560px;
+    margin: 0;
+  }
+
+  /* Section */
+  .section {
+    padding: 3rem 0;
+    border-top: 1px solid #F3F4F6;
+    animation: fadeUp 0.6s ease 0.1s both;
+  }
+
+  .section-grid {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 2rem;
+  }
+
+  .section-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #9CA3AF;
+    padding-top: 0.3rem;
+  }
+
+  .section-body p {
+    font-size: 1rem;
+    color: #4B5563;
+    line-height: 1.8;
+    margin: 0 0 1rem;
+  }
+
+  .section-body p:last-child { margin: 0; }
+
+  /* Features */
+  .features {
+    padding: 3rem 0;
+    border-top: 1px solid #F3F4F6;
+    animation: fadeUp 0.6s ease 0.2s both;
+  }
+
+  .features-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0 0 2rem;
+    color: #111827;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .feature-card {
+    background: #F9FAFB;
+    border: 1px solid #F3F4F6;
+    border-radius: 12px;
+    padding: 1.5rem 1.25rem;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  }
+
+  .feature-card:hover {
+    border-color: #D1D5DB;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    transform: translateY(-2px);
+  }
+
+  .feature-icon {
+    font-size: 1.6rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .feature-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+    color: #1F2937;
+  }
+
+  .feature-desc {
+    font-size: 0.875rem;
+    color: #6B7280;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Mission */
+  .mission {
+    margin-top: 4rem;
+    padding: 2.5rem 2rem;
+    background: #F9FAFB;
+    border-left: 3px solid #9CA3AF;
+    border-radius: 0 12px 12px 0;
+    animation: fadeUp 0.6s ease 0.3s both;
+  }
+
+  .mission blockquote {
+    font-family: 'DM Sans', sans-serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #374151;
+    line-height: 1.75;
+    margin: 0 0 0.75rem;
+  }
+
+  .mission cite {
+    font-size: 0.85rem;
+    color: #9CA3AF;
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 600px) {
+    .section-grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .section-label { padding-top: 0; }
+  }
+</style>

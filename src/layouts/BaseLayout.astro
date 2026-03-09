@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import SEO from "../components/SEO.astro";
+import Navbar from "../components/Navbar.astro";
 
 interface Props {
   title?: string;
@@ -29,6 +30,7 @@ const { title, description, image, noindex } = Astro.props;
     />
   </head>
   <body>
+	<Navbar />
     <div class="min-h-screen flex flex-col w-7xl mx-auto pt-10">
       <slot />
     </div>
