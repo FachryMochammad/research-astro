@@ -1,11 +1,18 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { Card } from "../components/Card";
-
+import { Button } from "antd";
 ---
 
-<BaseLayout>
-	<h1 class="text-3xl font-bold text-red-500">Welcome to Astro!</h1>
-	<p>This is the home page.</p>
-	<Card client:load title="Card Title" description="This is a card component." />
+<BaseLayout
+  title="Home"
+  description="Welcome to PortrAI — your workplace simulation platform."
+>
+  <h1 class="text-3xl font-bold text-red-500">Welcome to Astro!</h1>
+  <p>This is the home page.</p>
+  <Card client:load title="Card Title" description="This is a card component." />
+  <a href="/about">
+	<Button type="primary" className="mt-4">About</Button>
+  </a>
+
 </BaseLayout>

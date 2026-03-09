@@ -1,9 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HomePage from "../components/HomePage/HomePage";
-
 ---
 
-<BaseLayout>
-	<HomePage client:load  />
+<BaseLayout
+  title="Dashboard"
+  description="Your PortrAI dashboard — manage scenarios, messages, and documents."
+>
+  <HomePage client:load />
 </BaseLayout>
